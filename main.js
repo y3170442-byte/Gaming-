@@ -1,10 +1,10 @@
 const games = [
-  { id: 'subway-surfers', title: 'Subway Surfers', desc: 'Endless runner — dodge trains!', category: 'Action', poster: 'https://unsplash.com', src: 'https://poki.com' },
-  { id: 'level-devil', title: 'Level Devil', desc: 'A popular platformer full of tricky traps.', category: 'Action', poster: 'https://unsplash.com', src: 'https://github.io' },
-  { id: 'smash-karts', title: 'Smash Karts', desc: '3D multiplayer kart battle chaos.', category: 'Racing', poster: 'https://unsplash.com', src: 'https://smashkarts.io' },
-  { id: 'drive-mad', title: 'Drive Mad', desc: 'Physics driving game.', category: 'Racing', poster: 'https://unsplash.com', src: 'https://github.io' },
-  { id: 'stickman-hook', title: 'Stickman Hook', desc: 'Swing through levels.', category: 'Action', poster: 'https://unsplash.com', src: 'https://gamemonkey.org' },
-  { id: '2048', title: '2048', desc: 'Slide tiles and double numbers.', category: 'Puzzle', poster: 'https://unsplash.com', src: 'https://play2048.co' }
+  { id: 'subway-surfers', title: 'Subway Surfers', desc: 'Endless runner — dodge trains!', category: 'Action', poster: 'https://poki.com', src: 'https://poki.com' },
+  { id: 'level-devil', title: 'Level Devil', desc: 'A popular platformer full of tricky traps.', category: 'Action', poster: 'https://poki.com', src: 'https://github.io' },
+  { id: 'smash-karts', title: 'Smash Karts', desc: '3D multiplayer kart battle chaos.', category: 'Racing', poster: 'https://poki.com', src: 'https://smashkarts.io' },
+  { id: 'drive-mad', title: 'Drive Mad', desc: 'Physics driving game.', category: 'Racing', poster: 'https://poki.com', src: 'https://github.io' },
+  { id: 'stickman-hook', title: 'Stickman Hook', desc: 'Swing through levels.', category: 'Action', poster: 'https://poki.com', src: 'https://gamemonkey.org' },
+  { id: '2048', title: '2048', desc: 'Slide tiles and double numbers.', category: 'Puzzle', poster: 'https://poki.com', src: 'https://play2048.co' }
 ]
 
 const grid = document.getElementById('games-grid')
@@ -72,4 +72,9 @@ closeBtn.addEventListener('click', closeGame)
 let pts = parseInt(localStorage.getItem('gpp_pts') || '0', 10)
 pointsValue.textContent = pts
 setInterval(() => { pts += 50; pointsValue.textContent = pts; localStorage.setItem('gpp_pts', pts); }, 3600000)
-document.getElementById('year').textContent = new Date().getFullYear()
+
+const yearEl = document.getElementById('year')
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear()
+}
+
