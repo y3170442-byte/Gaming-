@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GAMINGPLUS+</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="points-box" class="points-box">
+        <span class="points-coin">🪙</span>
+        <span class="points-label">Your Points:</span>
+        <span id="points-value" class="points-value">0</span>
+      </div>
+      <header class="site-header">
+        <h1 class="brand">GAMINGPLUS</h1>
+        <p class="slogan">welcome to gameplus+ so just come and play and play!</p>
+      </header>
+      <div class="challenge-banner" role="alert">
+        <p class="challenge-text">🚨 SPECIAL CHALLENGE: Agar aap is month baaki sabhi users se zyada score gain karte hain, toh aap un TOP 3 logon me aayenge jinka photo Social Media par lagaya jayega! 🏆</p>
+      </div>
+      <div class="search-wrap">
+        <input id="game-search" type="text" class="search-input" placeholder="Search your favorite game... 🔍" aria-label="Search games" />
+      </div>
+      <nav id="category-tabs" class="category-tabs" aria-label="Game categories"></nav>
+      <main id="games-grid" class="games-grid"></main>
+      <p id="no-results" class="no-results" hidden>No games found. Try another search!</p>
+      <footer class="site-footer">
+        <p>GAMINGPLUS+ &copy; <span id="year"></span> — Play. Earn. Repeat.</p>
+      </footer>
+    </div>
+    <div id="game-overlay" class="game-overlay" hidden>
+      <button id="close-game" class="close-game" type="button">❌ Close Game</button>
+      <iframe id="game-frame" class="game-frame" src="" allow="autoplay; fullscreen; gamepad" allowfullscreen title="Game"></iframe>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
