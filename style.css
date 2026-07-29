@@ -51,7 +51,7 @@ body { margin: 0; min-height: 100vh; background: #ffffff; color: var(--ink); }
 .game-desc { margin: 0; font-size: 0.88rem; color: var(--muted); }
 .play-btn { margin-top: 0.7rem; align-self: flex-start; padding: 0.6rem 1.3rem; font-weight: 700; color: #ffffff; background: var(--navy); border: none; border-radius: 999px; cursor: pointer; }
 .play-btn:hover { background: var(--accent); }
-.game-overlay { position: fixed; inset: 0; z-index: 100; background: #000; display: flex; align-items: center; justify-content: center; }
+.game-overlay { position: fixed; inset: 0; z-index: 100; background: #000; display: none; align-items: center; justify-content: center; }
 .game-frame { width: 100%; height: 100%; border: none; }
 .close-game { position: fixed; top: 16px; right: 16px; z-index: 110; padding: 0.7rem 1.3rem; font-weight: 800; color: #fff; background: var(--accent); border: 2px solid #fff; border-radius: 999px; cursor: pointer; }
 @media (max-width: 640px) { .points-label { display: none; } .games-grid { grid-template-columns: 1fr; } }
