@@ -4,85 +4,282 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAMINGPLUS+</title>
-    <!-- Connecting your CSS file correctly -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* PURE WHITE BACKGROUND AND GENERAL LAYOUT RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff; /* Pure white background */
+            color: #000000; /* High contrast text */
+            padding-bottom: 60px;
+        }
+
+        /* HEADER SECTION */
+        header {
+            padding: 40px 20px 20px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* HIGH-CONTRAST DARK NAVY LOGO WITH TEXT SHADOW EFFECTS */
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #051937; /* Dark navy blue */
+            text-shadow: 2px 2px 5px rgba(5, 25, 55, 0.15); /* Subtle text shadow */
+            letter-spacing: 2px;
+        }
+
+        /* EXACT SIGNATURE SLOGAN */
+        .signature-slogan {
+            font-style: italic;
+            color: #555555;
+            margin-top: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* LIVE POINTS CORNER - FLOATING BOX WITH GOLDEN BORDER */
+        .points-corner {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            background: #ffffff;
+            border: 2px solid #ffd700; /* Golden border */
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+        }
+
+        /* MONTHLY CHALLENGE BANNER */
+        .challenge-box {
+            background-color: #fffde7; /* Light yellow accent background */
+            border-left: 6px solid #ffd600;
+            padding: 18px 24px;
+            margin: 20px auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #333333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        /* SMART SEARCH BAR AREA */
+        .search-wrapper {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .interactive-search {
+            width: 100%;
+            padding: 16px 28px;
+            font-size: 1.05rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+        }
+
+        .interactive-search:focus {
+            border-color: #051937;
+            box-shadow: 0 4px 15px rgba(5, 25, 55, 0.12);
+        }
+
+        /* GAMES CARD GRID LAYOUT */
+        .games-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        /* CLEAN PADDED CARD DESIGN WITH NEAT SHADOW */
+        .game-item-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+        }
+
+        /* SUBTLE CARD-HOVER ELEVATION */
+        .game-item-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(5, 25, 55, 0.08);
+        }
+
+        /* HIGH-QUALITY GAMING POSTERS STYLING */
+        .poster-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            background-color: #f7fafc;
+        }
+
+        .meta-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #ff9800;
+            letter-spacing: 0.8px;
+        }
+
+        .head-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #051937;
+        }
+
+        .snippet-desc {
+            font-size: 0.92rem;
+            color: #666666;
+            line-height: 1.5;
+        }
+
+        /* CLEAR "PLAY NOW" ACTION BUTTON */
+        .action-play-btn {
+            background-color: #051937; /* Dark navy color */
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: fit-content;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .action-play-btn:hover {
+            background-color: #0a2d5c;
+        }
+        
+        .action-play-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* NO OUTSIDE REDIRECTION: BORDERLESS FULL-SCREEN OVERLAY SYSTEM */
+        .fullscreen-game-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 99999;
+            display: none; /* Initially hidden */
+        }
+
+        .borderless-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* FIXED BOLD CLOSE GAME BUTTON */
+        .exit-game-trigger {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background-color: #ff3333;
+            color: #ffffff;
+            border: none;
+            padding: 14px 26px;
+            font-size: 1.05rem;
+            font-weight: 800; /* Bold button */
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 100000;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .exit-game-trigger:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+
+        /* RESPONSIVE DESIGN FOR TOP BAR ELEMENTS */
+        @media (max-width: 768px) {
+            header { display: flex; flex-direction: column; gap: 20px; padding-top: 20px; }
+            .points-corner { position: static; margin: 0 auto; }
+            .main-title { font-size: 2.5rem; }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- TOP HEADER & SLOGAN -->
     <header>
         <h1 class="main-title">GAMINGPLUS+</h1>
         <p class="signature-slogan">welcome to gameplus+ so just come and play and play!</p>
+        
+        <!-- LIVE POINTS CORNER -->
         <div class="points-corner" id="livePointsDisplay">🪙 Your Points: 0</div>
     </header>
 
+    <!-- MONTHLY CHALLENGE BANNER -->
     <section class="challenge-box">
         🚨 SPECIAL CHALLENGE: Agar aap is month baaki sabhi users se zyada score gain karte hain, toh aap un TOP 3 logon me aayenge jinka photo Social Media par lagaya jayega! 🏆
     
 
+    <!-- SMART SEARCH BAR -->
     <div class="search-wrapper">
         <input type="text" id="gameSearchBar" class="interactive-search" placeholder="Search your favorite game... 🔍">
     </div>
 
+    <!-- GAMES CARD GRID LAYOUT WITH TOP POKI GAMES -->
     <main class="games-container">
         <div class="responsive-grid" id="mainGamesLayout">
             
+            <!-- Card 1: Subway Surfers -->
             <div class="game-item-card" data-gametitle="subway surfers">
                 <img class="poster-img" src="https://unsplash.com" alt="Subway Surfers">
                 <span class="meta-category">Action / Arcades</span>
                 <h3 class="head-title">Subway Surfers</h3>
                 <p class="snippet-desc">Endless runner game setup. Escape inspectors, dodge heavy trains, and dash as fast as you can!</p>
-                <button class="action-play-btn" data-embedsrc="https://github.io">▶ Play Now</button>
+                <button class="action-play-btn" data-embedsrc="https://gamedistribution.com">▶ Play Now</button>
             </div>
 
+            <!-- Card 2: Level Devil -->
             <div class="game-item-card" data-gametitle="level devil">
                 <img class="poster-img" src="https://unsplash.com" alt="Level Devil">
                 <span class="meta-category">Action / Platformer</span>
                 <h3 class="head-title">Level Devil</h3>
                 <p class="snippet-desc">A brutal, trap-filled platformer setup. Expect unexpected spikes and moving floors everywhere.</p>
-                <button class="action-play-btn" data-embedsrc="https://github.io">▶ Play Now</button>
+                <button class="action-play-btn" data-embedsrc="https://gamedistribution.com">▶ Play Now</button>
             </div>
 
+            <!-- Card 3: Smash Karts -->
             <div class="game-item-card" data-gametitle="smash karts">
                 <img class="poster-img" src="https://unsplash.com" alt="Smash Karts">
                 <span class="meta-category">3D Multiplayer / Racing</span>
                 <h3 class="head-title">Smash Karts</h3>
                 <p class="snippet-desc">Drive fast 3D go-karts, collect dangerous weapons, and blow up other online players in the arena.</p>
-                <button class="action-play-btn" data-embedsrc="https://smashkarts.io">▶ Play Now</button>
+                <button class="action-play-btn" data-embedsrc="https://gamedistribution.com">▶ Play Now</button>
             </div>
 
-            <div class="game-item-card" data-gametitle="drive mad">
-                <img class="poster-img" src="https://unsplash.com" alt="Drive Mad">
-                <span class="meta-category">Racing / Physics</span>
-                <h3 class="head-title">Drive Mad</h3>
-                <p class="snippet-desc">Control heavy trucks through insane stunt obstacles. Balance your speed carefully so you don't flip over.</p>
-                <button class="action-play-btn" data-embedsrc="https://github.io">▶ Play Now</button>
-            </div>
-
-            <div class="game-item-card" data-gametitle="stickman hook">
-                <img class="poster-img" src="https://unsplash.com" alt="Stickman Hook">
-                <span class="meta-category">Physics / Swing</span>
-                <h3 class="head-title">Stickman Hook</h3>
-                <p class="snippet-desc">Hook onto points and make incredible swings. Control your physics momentum to reach the finish line safely.</p>
-                <button class="action-play-btn" data-embedsrc="https://github.io">▶ Play Now</button>
-            </div>
-
-            <div class="game-item-card" data-gametitle="temple run 2">
-                <img class="poster-img" src="https://unsplash.com" alt="Temple Run 2">
-                <span class="meta-category">Classic / Runner</span>
-                <h3 class="head-title">Temple Run 2</h3>
-                <p class="snippet-desc">Navigate dangerous cliffs, zip lines, and dark mines as you try to escape with the cursed idol artifact!</p>
-                <button class="action-play-btn" data-embedsrc="https://github.io">▶ Play Now</button>
-            </div>
-
-        </div>
-    </main>
-
-    <div class="fullscreen-game-overlay" id="globalGameScreenOverlay">
-        <button class="exit-game-trigger" id="masterExitBtn">❌ Close Game</button>
-        <iframe class="borderless-frame" id="embeddedGameIframe" src="" allowfullscreen></iframe>
-    </div>
-
-    <!-- Connecting your JavaScript file correctly -->
-    <script src="main.js"></script>
-</body>
-</html>
