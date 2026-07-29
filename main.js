@@ -1,93 +1,52 @@
-const games = [
-  { id: 'subway-surfers', title: 'Subway Surfers', desc: 'Endless runner — dodge trains!', category: 'Action', poster: 'https://unsplash.com', src: 'https://poki.com' },
-  { id: 'level-devil', title: 'Level Devil', desc: 'A popular platformer full of tricky traps.', category: 'Action', poster: 'https://unsplash.com', src: 'https://gamedistribution.com' },
-  { id: 'smash-karts', title: 'Smash Karts', desc: '3D multiplayer kart battle chaos.', category: 'Racing', poster: 'https://unsplash.com', src: 'https://smashkarts.io' },
-  { id: 'drive-mad', title: 'Drive Mad', desc: 'Physics driving game.', category: 'Racing', poster: 'https://unsplash.com', src: 'https://gamedistribution.com' },
-  { id: 'stickman-hook', title: 'Stickman Hook', desc: 'Swing through levels.', category: 'Action', poster: 'https://unsplash.com', src: 'https://gamedistribution.com' },
-  { id: '2048', title: '2048', desc: 'Slide tiles and double numbers.', category: 'Puzzle', poster: 'https://unsplash.com', src: 'https://play2048.co' }
-]
+let activeUserPoints = 0;
+const livePointsDisplay = document.getElementById('livePointsDisplay');
+setInterval(() => {
+    activeUserPoints += 50;
+    if(livePointsDisplay) livePointsDisplay.innerHTML = `🪙 Your Points: ${activeUserPoints}`;
+}, 3600000);
 
-const grid = document.getElementById('games-grid')
-const noResults = document.getElementById('no-results')
-const searchInput = document.getElementById('game-search')
-const overlay = document.getElementById('game-overlay')
-const gameFrame = document.getElementById('game-frame')
-const closeBtn = document.getElementById('close-game')
-const pointsValue = document.getElementById('points-value')
-const categoryTabs = document.getElementById('category-tabs')
-
-const categories = ['All', ...new Set(games.map((g) => g.category))]
-let activeCategory = 'All'
-
-categories.forEach((cat) => {
-  const btn = document.createElement('button')
-  btn.className = 'cat-tab' + (cat === 'All' ? ' active' : '')
-  btn.textContent = cat
-  btn.addEventListener('click', () => {
-    activeCategory = cat
-    document.querySelectorAll('.cat-tab').forEach((b) => b.classList.remove('active'))
-    btn.classList.add('active')
-    applyFilters()
-  })
-  categoryTabs.appendChild(btn)
-})
-
-function renderCards(list) {
-  grid.innerHTML = ''
-  list.forEach((g) => {
-    const card = document.createElement('article')
-    card.className = 'game-card'
-    card.innerHTML = `
-      <img class="game-poster" src="${g.poster}" alt="${g.title}" />
-      <div class="game-body">
-        <span class="game-cat">${g.category}</span>
-        <h3 class="game-title">${g.title}</h3>
-        <p class="game-desc">${g.desc}</p>
-        <button class="play-btn" type="button" data-src="${g.src}">▶ Play Now</button>
-      </div>
-    `
-    const btn = card.querySelector('.play-btn')
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation()
-      const gameUrl = btn.getAttribute('data-src')
-      openGame(gameUrl)
-    })
-    
-    grid.appendChild(card)
-  })
+const gameSearchBar = document.getElementById('gameSearchBar');
+const totalGameCards = document.querySelectorAll('.game-item-card');
+if(gameSearchBar) {
+    gameSearchBar.addEventListener('input', (event) => {
+        const inputQuery = event.target.value.toLowerCase().trim();
+        totalGameCards.forEach(cardItem => {
+            const searchTag = cardItem.getAttribute('data-gametitle');
+            if (searchTag && searchTag.includes(inputQuery)) {
+                cardItem.style.display = 'flex';
+            } else {
+                cardItem.style.display = 'none';
+            }
+        });
+    });
 }
 
-function applyFilters() {
-  const q = searchInput.value.trim().toLowerCase()
-  const filtered = games.filter((g) => {
-    const matchCat = activeCategory === 'All' || g.category === activeCategory
-    const matchSearch = g.title.toLowerCase().includes(q)
-    return matchCat && matchSearch
-  })
-  if (filtered.length === 0) { grid.innerHTML = ''; noResults.hidden = false; }
-  else { noResults.hidden = true; renderCards(filtered); }
+const allPlayActionBtns = document.querySelectorAll('.action-play-btn');
+const globalGameScreenOverlay = document.getElementById('globalGameScreenOverlay');
+const embeddedGameIframe = document.getElementById('embeddedGameIframe');
+const masterExitBtn = document.getElementById('masterExitBtn');
+
+allPlayActionBtns.forEach(btnNode => {
+    btnNode.addEventListener('click', () => {
+        const targetGameSourceUrl = btnNode.getAttribute('data-embedsrc');
+        if(globalGameScreenOverlay && embeddedGameIframe) {
+            globalGameScreenOverlay.style.display = 'block';
+            embeddedGameIframe.src = targetGameSourceUrl;
+            if (globalGameScreenOverlay.requestFullscreen) {
+                globalGameScreenOverlay.requestFullscreen();
+            }
+        }
+    });
+});
+
+if(masterExitBtn) {
+    masterExitBtn.addEventListener('click', () => {
+        if(globalGameScreenOverlay && embeddedGameIframe) {
+            globalGameScreenOverlay.style.display = 'none';
+            embeddedGameIframe.src = "";
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    });
 }
-
-renderCards(games)
-searchInput.addEventListener('input', applyFilters)
-
-function openGame(src) { 
-  gameFrame.src = src;
-  overlay.removeAttribute('hidden');
-  document.body.style.overflow = 'hidden'; 
-}
-
-function closeGame() { 
-  gameFrame.src = '';
-  overlay.setAttribute('hidden', 'true');
-  document.body.style.overflow = ''; 
-}
-
-closeBtn.addEventListener('click', closeGame)
-
-let pts = parseInt(localStorage.getItem('gpp_pts') || '0', 10)
-pointsValue.textContent = pts
-setInterval(() => { pts += 50; pointsValue.textContent = pts; localStorage.setItem('gpp_pts', pts); }, 3600000)
-
-const yearEl = document.getElementById('year')
-if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
