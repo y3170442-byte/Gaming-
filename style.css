@@ -1,94 +1,175 @@
-const games = [
-  { id: 'subway-surfers', title: 'Subway Surfers', desc: 'Endless runner — dodge trains!', category: 'Action', poster: 'https://unsplash.com', src: 'https://poki.com' },
-  { id: 'level-devil', title: 'Level Devil', desc: 'A popular platformer full of tricky traps.', category: 'Action', poster: 'https://unsplash.com', src: 'https://gamedistribution.com' },
-  { id: 'smash-karts', title: 'Smash Karts', desc: '3D multiplayer kart battle chaos.', category: 'Racing', poster: 'https://unsplash.com', src: 'https://smashkarts.io' },
-  { id: 'drive-mad', title: 'Drive Mad', desc: 'Physics driving game.', category: 'Racing', poster: 'https://unsplash.com', src: 'https://gamedistribution.com' },
-  { id: 'stickman-hook', title: 'Stickman Hook', desc: 'Swing through levels.', category: 'Action', poster: 'https://unsplash.com', src: 'https://gamedistribution.com' },
-  { id: '2048', title: '2048', desc: 'Slide tiles and double numbers.', category: 'Puzzle', poster: 'https://unsplash.com', src: 'https://play2048.co' }
-]
-
-const grid = document.getElementById('games-grid')
-const noResults = document.getElementById('no-results')
-const searchInput = document.getElementById('game-search')
-const overlay = document.getElementById('game-overlay')
-const gameFrame = document.getElementById('game-frame')
-const closeBtn = document.getElementById('close-game')
-const pointsValue = document.getElementById('points-value')
-const categoryTabs = document.getElementById('category-tabs')
-
-const categories = ['All', ...new Set(games.map((g) => g.category))]
-let activeCategory = 'All'
-
-categories.forEach((cat) => {
-  const btn = document.createElement('button')
-  btn.className = 'cat-tab' + (cat === 'All' ? ' active' : '')
-  btn.textContent = cat
-  btn.addEventListener('click', () => {
-    activeCategory = cat
-    document.querySelectorAll('.cat-tab').forEach((b) => b.classList.remove('active'))
-    btn.classList.add('active')
-    applyFilters()
-  })
-  categoryTabs.appendChild(btn)
-})
-
-function renderCards(list) {
-  grid.innerHTML = ''
-  list.forEach((g) => {
-    const card = document.createElement('article')
-    card.className = 'game-card'
-    card.innerHTML = `
-      <img class="game-poster" src="${g.poster}" alt="${g.title}" />
-      <div class="game-body">
-        <span class="game-cat">${g.category}</span>
-        <h3 class="game-title">${g.title}</h3>
-        <p class="game-desc">${g.desc}</p>
-        <button class="play-btn" type="button" data-src="${g.src}">▶ Play Now</button>
-      </div>
-    `
-    const btn = card.querySelector('.play-btn')
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation()
-      const gameUrl = btn.getAttribute('data-src')
-      openGame(gameUrl)
-    })
-    
-    grid.appendChild(card)
-  })
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
-
-function applyFilters() {
-  const q = searchInput.value.trim().toLowerCase()
-  const filtered = games.filter((g) => {
-    const matchCat = activeCategory === 'All' || g.category === activeCategory
-    const matchSearch = g.title.toLowerCase().includes(q)
-    return matchCat && matchSearch
-  })
-  if (filtered.length === 0) { grid.innerHTML = ''; noResults.hidden = false; }
-  else { noResults.hidden = true; renderCards(filtered); }
+body {
+    background-color: #ffffff;
+    color: #000000;
+    padding-bottom: 60px;
 }
-
-renderCards(games)
-searchInput.addEventListener('input', applyFilters)
-
-function openGame(src) { 
-  gameFrame.src = src;
-  overlay.removeAttribute('hidden');
-  document.body.style.overflow = 'hidden'; 
+header {
+    padding: 40px 20px 20px 20px;
+    text-align: center;
+    position: relative;
 }
-
-function closeGame() { 
-  gameFrame.src = '';
-  overlay.setAttribute('hidden', 'true');
-  document.body.style.overflow = ''; 
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #051937;
+    text-shadow: 2px 2px 5px rgba(5, 25, 55, 0.15);
+    letter-spacing: 2px;
 }
-
-closeBtn.addEventListener('click', closeGame)
-
-let pts = parseInt(localStorage.getItem('gpp_pts') || '0', 10)
-pointsValue.textContent = pts
-setInterval(() => { pts += 50; pointsValue.textContent = pts; localStorage.setItem('gpp_pts', pts); }, 3600000)
-
-const yearEl = document.getElementById('year')
-if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
-
+.signature-slogan {
+    font-style: italic;
+    color: #555555;
+    margin-top: 8px;
+    font-size: 1.1rem;
+}
+.points-corner {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: #ffffff;
+    border: 2px solid #ffd700;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+}
+.challenge-box {
+    background-color: #fffde7;
+    border-left: 6px solid #ffd600;
+    padding: 18px 24px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+.search-wrapper {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+.interactive-search {
+    width: 100%;
+    padding: 16px 28px;
+    font-size: 1.05rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 50px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+}
+.interactive-search:focus {
+    border-color: #051937;
+    box-shadow: 0 4px 15px rgba(5, 25, 55, 0.12);
+}
+.games-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 35px;
+}
+.game-item-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 18px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+}
+.game-item-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(5, 25, 55, 0.08);
+}
+.poster-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    background-color: #f7fafc;
+}
+.meta-category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #ff9800;
+    letter-spacing: 0.8px;
+}
+.head-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #051937;
+}
+.snippet-desc {
+    font-size: 0.92rem;
+    color: #666666;
+    line-height: 1.5;
+}
+.action-play-btn {
+    background-color: #051937;
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.action-play-btn:hover { background-color: #0a2d5c; }
+.action-play-btn:active { transform: scale(0.98); }
+.fullscreen-game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 99999;
+    display: none;
+}
+.borderless-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+.exit-game-trigger {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background-color: #ff3333;
+    color: #ffffff;
+    border: none;
+    padding: 14px 26px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 100000;
+}
+@media (max-width: 768px) {
+    header { display: flex; flex-direction: column; gap: 20px; }
+    .points-corner { position: static; margin: 0 auto; }
+    .main-title { font-size: 2.5rem; }
+}
