@@ -74,14 +74,12 @@ searchInput.addEventListener('input', applyFilters)
 function openGame(src) { 
   gameFrame.src = src;
   overlay.removeAttribute('hidden');
-  overlay.style.display = 'flex';
   document.body.style.overflow = 'hidden'; 
 }
 
 function closeGame() { 
   gameFrame.src = '';
   overlay.setAttribute('hidden', 'true');
-  overlay.style.display = 'none';
   document.body.style.overflow = ''; 
 }
 
@@ -93,4 +91,3 @@ setInterval(() => { pts += 50; pointsValue.textContent = pts; localStorage.setIt
 
 const yearEl = document.getElementById('year')
 if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
-
