@@ -8,175 +8,64 @@
 </head>
 <body>
 
-    <header>
+    <div class="points-corner" id="livePointsDisplay">🪙 Your Points: 0</div>
+
+    <header class="site-header">
         <h1 class="main-title">GAMINGPLUS+</h1>
         <p class="signature-slogan">welcome to gameplus+ so just come and play and play!</p>
-        <div class="points-corner" id="livePointsDisplay">🪙 Your Points: 0</div>
     </header>
 
-    <div class="challenge-box">
-        🚨 SPECIAL CHALLENGE: Agar aap is month baaki sabhi users se zyada score gain karte hain, toh aap un TOP 3 logon me aayenge jinka photo Social Media par lagaya jayega! 🏆
-    </div>
+    <main class="content-shell">
 
-    <div class="search-wrapper">
-        <input type="text" id="gameSearchBar" class="interactive-search" placeholder="Search your favorite game... 🔍">
-    </div>
+        <div class="challenge-box">
+            🚨 SPECIAL CHALLENGE: Agar aap is month baaki sabhi users se zyada score gain karte hain, toh aap un TOP 3 logon me aayenge jinka photo Social Media par lagaya jayega! 🏆
+        </div>
 
-    <main class="games-container">
+        <div class="search-wrapper">
+            <input type="text" id="gameSearchBar" class="interactive-search" placeholder="Search your favorite game... 🔍" autocomplete="off">
+        </div>
+
+        <p class="no-results-msg" id="noResultsMsg" hidden>Koi game nahi mila — kuch aur try karo.</p>
+
         <div class="responsive-grid" id="mainGamesLayout">
 
             <!-- Card 1 -->
-            <div class="game-item-card" data-gametitle="runner dash subway">
-                <div class="image-placeholder-box">🏃‍♂️</div>
-                <span class="meta-category">Action / Arcade</span>
-                <h3 class="head-title">Runner Dash</h3>
-                <p class="snippet-desc">Endless lane runner. Switch lanes and jump to dodge everything coming at you.</p>
-                <button class="action-play-btn" data-game="runner">▶ Play Now</button>
+            <div class="game-item-card" data-gametitle="subway surfers endless runner train dash arcade">
+                <div class="card-thumb">
+                    <img src="images/subway-surfers.png" alt="Subway Surfers" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="meta-category">Action / Arcades</span>
+                    <h3 class="head-title">Subway Surfers</h3>
+                    <p class="snippet-desc">Endless runner game setup. Escape inspectors, dodge heavy trains, and dash as fast as you can!</p>
+                    <button class="action-play-btn" data-game="runner">▶ Play Now</button>
+                </div>
             </div>
 
             <!-- Card 2 -->
-            <div class="game-item-card" data-gametitle="trap jumper level devil">
-                <div class="image-placeholder-box">😈</div>
-                <span class="meta-category">Action / Platformer</span>
-                <h3 class="head-title">Trap Jumper</h3>
-                <p class="snippet-desc">A brutal, trap-filled platformer. Time your jumps over the spikes or restart.</p>
-                <button class="action-play-btn" data-game="trap">▶ Play Now</button>
+            <div class="game-item-card" data-gametitle="level devil trap platformer spikes moving floors">
+                <div class="card-thumb">
+                    <img src="images/level-devil.png" alt="Level Devil" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="meta-category">Action / Platformer</span>
+                    <h3 class="head-title">Level Devil</h3>
+                    <p class="snippet-desc">A brutal, trap-filled platformer setup. Expect unexpected spikes and moving floors everywhere.</p>
+                    <button class="action-play-btn" data-game="trap">▶ Play Now</button>
+                </div>
             </div>
 
             <!-- Card 3 -->
-            <div class="game-item-card" data-gametitle="kart arena smash">
-                <div class="image-placeholder-box">🏎️</div>
-                <span class="meta-category">Top-Down / Racing</span>
-                <h3 class="head-title">Kart Arena</h3>
-                <p class="snippet-desc">Steer your kart, dodge the rocks, and grab every coin you can find.</p>
-                <button class="action-play-btn" data-game="kart">▶ Play Now</button>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="game-item-card" data-gametitle="hill driver drive mad">
-                <div class="image-placeholder-box">🚗</div>
-                <span class="meta-category">Physics / Driving</span>
-                <h3 class="head-title">Hill Driver</h3>
-                <p class="snippet-desc">Balance your speed on bumpy hills. Too fast or too steep and you'll flip.</p>
-                <button class="action-play-btn" data-game="drive">▶ Play Now</button>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="game-item-card" data-gametitle="swing hook stickman">
-                <div class="image-placeholder-box">🕸️</div>
-                <span class="meta-category">Physics / Swing</span>
-                <h3 class="head-title">Swing Hook</h3>
-                <p class="snippet-desc">Fire your hook at the anchors above and swing across the gaps.</p>
-                <button class="action-play-btn" data-game="hook">▶ Play Now</button>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="game-item-card" data-gametitle="temple dash 2 run">
-                <div class="image-placeholder-box">🏛️</div>
-                <span class="meta-category">Action / Arcade</span>
-                <h3 class="head-title">Temple Dash 2</h3>
-                <p class="snippet-desc">Jump and duck through an endless ruin. Every obstacle needs a different move.</p>
-                <button class="action-play-btn" data-game="temple">▶ Play Now</button>
-            </div>
-
-            <!-- ============================================
-                 REAL GAMES — via GameDistribution Direct Game
-                 Integration. Sign up free at gamedistribution.com,
-                 pick a game from the catalog, copy its embed link,
-                 and paste it into data-embedsrc below.
-                 Card 7 already has a REAL working example (HOTGEAR).
-                 Cards 8-16 are ready slots — replace GAME_ID_HERE
-                 and gd_sdk_referrer_url with your own copied link.
-                 ============================================ -->
-
-            <!-- Card 7: REAL working example -->
-            <div class="game-item-card" data-gametitle="hotgear racing car chase">
-                <div class="image-placeholder-box">🚓</div>
-                <span class="meta-category">Racing / Action</span>
-                <h3 class="head-title">HOTGEAR</h3>
-                <p class="snippet-desc">Customize your car and outrun the chase in this high-speed racer.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/95c32bbf9a834a17a6ddac3ef76d2b2e/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 8 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 2</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 9 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 3</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 10 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 4</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 11 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 5</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 12 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 6</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 13 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 7</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 14 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 8</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 15 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 9</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
-            </div>
-
-            <!-- Card 16 -->
-            <div class="game-item-card" data-gametitle="game name here">
-                <div class="image-placeholder-box">🎮</div>
-                <span class="meta-category">Category here</span>
-                <h3 class="head-title">Game Title 10</h3>
-                <p class="snippet-desc">Short description from the GameDistribution catalog page.</p>
-                <button class="action-play-btn" data-embedsrc="https://html5.gamedistribution.com/GAME_ID_HERE/?gd_sdk_referrer_url=https://your-site.github.io/">▶ Play Now</button>
+            <div class="game-item-card" data-gametitle="smash karts 3d multiplayer racing battle weapons">
+                <div class="card-thumb">
+                    <img src="images/smash-karts.png" alt="Smash Karts" loading="lazy">
+                </div>
+                <div class="card-body">
+                    <span class="meta-category">3D Multiplayer / Racing</span>
+                    <h3 class="head-title">Smash Karts</h3>
+                    <p class="snippet-desc">Drive fast 3D go-karts, collect dangerous weapons, and blow up other online players in the arena.</p>
+                    <button class="action-play-btn" data-game="kart">▶ Play Now</button>
+                </div>
             </div>
 
         </div>
@@ -185,6 +74,7 @@
     <div class="fullscreen-game-overlay" id="globalGameScreenOverlay">
         <div class="overlay-topbar">
             <span class="active-game-title" id="activeGameTitle"></span>
+            <span class="active-game-score" id="activeGameScore">Score: 0</span>
             <button class="exit-game-trigger" id="masterExitBtn">❌ Close Game</button>
         </div>
         <div class="game-stage" id="gameStage"></div>
@@ -195,7 +85,7 @@
                 <button class="touch-btn" data-key="ArrowDown">▼</button>
                 <button class="touch-btn" data-key="ArrowRight">▶</button>
             </div>
-            <button class="touch-btn touch-action" data-key=" ">HOOK / JUMP</button>
+            <button class="touch-btn touch-action" data-key=" ">JUMP / FIRE</button>
         </div>
     </div>
 
