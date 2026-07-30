@@ -4,215 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAMINGPLUS+</title>
-    <style>
-        /* PURE WHITE BACKGROUND AND GENERAL LAYOUT RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        body {
-            background-color: #ffffff; /* Pure white background */
-            color: #000000;
-            padding-bottom: 60px;
-        }
-
-        header {
-            padding: 40px 20px 20px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .main-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #051937;
-            text-shadow: 2px 2px 5px rgba(5, 25, 55, 0.15);
-            letter-spacing: 2px;
-        }
-
-        .signature-slogan {
-            font-style: italic;
-            color: #555555;
-            margin-top: 8px;
-            font-size: 1.1rem;
-        }
-
-        .points-corner {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            background: #ffffff;
-            border: 2px solid #ffd700;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
-        }
-
-        .challenge-box {
-            background-color: #fffde7;
-            border-left: 6px solid #ffd600;
-            padding: 18px 24px;
-            margin: 20px auto;
-            max-width: 1200px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #333333;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-        }
-
-        .search-wrapper {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .interactive-search {
-            width: 100%;
-            padding: 16px 28px;
-            font-size: 1.05rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 50px;
-            outline: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
-        }
-
-        .interactive-search:focus {
-            border-color: #051937;
-            box-shadow: 0 4px 15px rgba(5, 25, 55, 0.12);
-        }
-
-        .games-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .responsive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 35px;
-        }
-
-        .game-item-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
-        }
-
-        .game-item-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 32px rgba(5, 25, 55, 0.08);
-        }
-
-        /* STYLING BOX IF NO IMAGES ARE PRESENT */
-        .image-placeholder-box {
-            width: 100%;
-            height: 180px;
-            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .meta-category {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            font-weight: 800;
-            color: #ff9800;
-            letter-spacing: 0.8px;
-            margin-top: 10px;
-        }
-
-        .head-title {
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: #051937;
-        }
-
-        .snippet-desc {
-            font-size: 0.92rem;
-            color: #666666;
-            line-height: 1.5;
-            min-height: 70px;
-        }
-
-        .action-play-btn {
-            background-color: #051937;
-            color: #ffffff;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%; /* Full card width button for better premium UI */
-            transition: background-color 0.2s ease;
-        }
-
-        .action-play-btn:hover {
-            background-color: #0a2d5c;
-        }
-
-        /* FULL-SCREEN OVERLAY SYSTEM */
-        .fullscreen-game-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #000000;
-            z-index: 99999;
-            display: none;
-        }
-
-        .borderless-frame {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        .exit-game-trigger {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            background-color: #ff3333;
-            color: #ffffff;
-            border: none;
-            padding: 14px 26px;
-            font-size: 1.05rem;
-            font-weight: 800;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            z-index: 100000;
-        }
-
-        @media (max-width: 768px) {
-            header { display: flex; flex-direction: column; gap: 20px; padding-top: 20px; }
-            .points-corner { position: static; margin: 0 auto; }
-            .main-title { font-size: 2.5rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -232,68 +24,81 @@
 
     <main class="games-container">
         <div class="responsive-grid" id="mainGamesLayout">
-            
-            <!-- Card 1: Subway Surfers -->
-            <div class="game-item-card" data-gametitle="subway surfers">
+
+            <!-- Card 1 -->
+            <div class="game-item-card" data-gametitle="runner dash subway">
                 <div class="image-placeholder-box">🏃‍♂️</div>
-                <span class="meta-category">Action / Arcades</span>
-                <h3 class="head-title">Subway Surfers</h3>
-                <p class="snippet-desc">Endless runner game setup. Escape inspectors, dodge heavy trains, and dash as fast as you can!</p>
-                <button class="action-play-btn" data-embedsrc="https://repl.co">▶ Play Now</button>
+                <span class="meta-category">Action / Arcade</span>
+                <h3 class="head-title">Runner Dash</h3>
+                <p class="snippet-desc">Endless lane runner. Switch lanes and jump to dodge everything coming at you.</p>
+                <button class="action-play-btn" data-game="runner">▶ Play Now</button>
             </div>
 
-            <!-- Card 2: Level Devil -->
-            <div class="game-item-card" data-gametitle="level devil">
+            <!-- Card 2 -->
+            <div class="game-item-card" data-gametitle="trap jumper level devil">
                 <div class="image-placeholder-box">😈</div>
                 <span class="meta-category">Action / Platformer</span>
-                <h3 class="head-title">Level Devil</h3>
-                <p class="snippet-desc">A brutal, trap-filled platformer setup. Expect unexpected spikes and moving floors everywhere.</p>
-                <button class="action-play-btn" data-embedsrc="https://workers.dev">▶ Play Now</button>
+                <h3 class="head-title">Trap Jumper</h3>
+                <p class="snippet-desc">A brutal, trap-filled platformer. Time your jumps over the spikes or restart.</p>
+                <button class="action-play-btn" data-game="trap">▶ Play Now</button>
             </div>
 
-            <!-- Card 3: Smash Karts -->
-            <div class="game-item-card" data-gametitle="smash karts">
+            <!-- Card 3 -->
+            <div class="game-item-card" data-gametitle="kart arena smash">
                 <div class="image-placeholder-box">🏎️</div>
-                <span class="meta-category">3D Multiplayer / Racing</span>
-                <h3 class="head-title">Smash Karts</h3>
-                <p class="snippet-desc">Drive fast 3D go-karts, collect dangerous weapons, and blow up other online players in the arena.</p>
-                <button class="action-play-btn" data-embedsrc="https://smashkarts.io">▶ Play Now</button>
+                <span class="meta-category">Top-Down / Racing</span>
+                <h3 class="head-title">Kart Arena</h3>
+                <p class="snippet-desc">Steer your kart, dodge the rocks, and grab every coin you can find.</p>
+                <button class="action-play-btn" data-game="kart">▶ Play Now</button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="game-item-card" data-gametitle="hill driver drive mad">
+                <div class="image-placeholder-box">🚗</div>
+                <span class="meta-category">Physics / Driving</span>
+                <h3 class="head-title">Hill Driver</h3>
+                <p class="snippet-desc">Balance your speed on bumpy hills. Too fast or too steep and you'll flip.</p>
+                <button class="action-play-btn" data-game="drive">▶ Play Now</button>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="game-item-card" data-gametitle="swing hook stickman">
+                <div class="image-placeholder-box">🕸️</div>
+                <span class="meta-category">Physics / Swing</span>
+                <h3 class="head-title">Swing Hook</h3>
+                <p class="snippet-desc">Fire your hook at the anchors above and swing across the gaps.</p>
+                <button class="action-play-btn" data-game="hook">▶ Play Now</button>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="game-item-card" data-gametitle="temple dash 2 run">
+                <div class="image-placeholder-box">🏛️</div>
+                <span class="meta-category">Action / Arcade</span>
+                <h3 class="head-title">Temple Dash 2</h3>
+                <p class="snippet-desc">Jump and duck through an endless ruin. Every obstacle needs a different move.</p>
+                <button class="action-play-btn" data-game="temple">▶ Play Now</button>
             </div>
 
         </div>
     </main>
 
     <div class="fullscreen-game-overlay" id="globalGameScreenOverlay">
-        <button class="exit-game-trigger" id="masterExitBtn">❌ Close Game</button>
-        <iframe class="borderless-frame" id="embeddedGameIframe" src="" allowfullscreen></iframe>
+        <div class="overlay-topbar">
+            <span class="active-game-title" id="activeGameTitle"></span>
+            <button class="exit-game-trigger" id="masterExitBtn">❌ Close Game</button>
+        </div>
+        <div class="game-stage" id="gameStage"></div>
+        <div class="touch-controls" id="touchControls">
+            <div class="touch-row">
+                <button class="touch-btn" data-key="ArrowLeft">◀</button>
+                <button class="touch-btn" data-key="ArrowUp">▲</button>
+                <button class="touch-btn" data-key="ArrowDown">▼</button>
+                <button class="touch-btn" data-key="ArrowRight">▶</button>
+            </div>
+            <button class="touch-btn touch-action" data-key=" ">HOOK / JUMP</button>
+        </div>
     </div>
 
-    <script>
-        // 1. LIVE POINTS SYSTEM
-        let activeUserPoints = 0;
-        const livePointsDisplay = document.getElementById('livePointsDisplay');
-        setInterval(() => {
-            activeUserPoints += 50;
-            if(livePointsDisplay) livePointsDisplay.innerHTML = `🪙 Your Points: ${activeUserPoints}`;
-        }, 3600000);
-
-        // 2. REAL-TIME SMART SEARCH FILTER
-        const gameSearchBar = document.getElementById('gameSearchBar');
-        const totalGameCards = document.querySelectorAll('.game-item-card');
-
-        if(gameSearchBar) {
-            gameSearchBar.addEventListener('input', (event) => {
-                const inputQuery = event.target.value.toLowerCase().trim();
-                
-                totalGameCards.forEach(cardItem => {
-                    const searchTag = cardItem.getAttribute('data-gametitle');
-                    if (searchTag && searchTag.includes(inputQuery)) {
-                        cardItem.style.display = 'flex';
-                    } else {
-                        cardItem.style.display = 'none';
-                    }
-                });
-            });
-        }
-
-        // 3. OVERLAY MANAGEMENT (Full screen activation)
+    <script src="main.js"></script>
+</body>
+</html>
